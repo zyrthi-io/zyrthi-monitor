@@ -8,6 +8,9 @@ import (
 	"syscall"
 
 	"go.bug.st/serial"
+
+	"github.com/zyrthi-io/zyrthi-monitor/internal/config"
+	"github.com/zyrthi-io/zyrthi-monitor/internal/monitor"
 )
 
 var (
@@ -24,10 +27,10 @@ func main() {
 	flag.Parse()
 
 	// 读取配置
-	cfg, err := loadConfig(*flagConfig)
+	cfg, err := config.Load(*flagConfig)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "警告: 无法读取配置文件: %v\n", err)
-		cfg = &Config{Monitor: MonitorConfig{Baud: 115200}}
+		cfg = &config.Config{Monitor: config.MonitorConfig{Baud: 115200}}
 	}
 
 	// 参数覆盖配置
@@ -76,7 +79,7 @@ func main() {
 	signal.Notify(sigChan, syscall.SIGINT, syscall.SIGTERM)
 
 	// 启动读写
-	mon := NewMonitor(serialPort, &Options{
+	mon := monitor.New(serialPort, &monitor.Options{
 		Timestamp: *flagTimestamp || cfg.Monitor.Timestamp,
 		Hex:       *flagHex,
 		LogFile:   *flagLog,

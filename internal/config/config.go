@@ -1,4 +1,4 @@
-package main
+package config
 
 import (
 	"os"
@@ -20,8 +20,8 @@ type MonitorConfig struct {
 	Timestamp bool   `yaml:"timestamp"`
 }
 
-// loadConfig 从 zyrthi.yaml 加载配置
-func loadConfig(path string) (*Config, error) {
+// Load 从 zyrthi.yaml 加载配置
+func Load(path string) (*Config, error) {
 	data, err := os.ReadFile(path)
 	if err != nil {
 		return nil, err

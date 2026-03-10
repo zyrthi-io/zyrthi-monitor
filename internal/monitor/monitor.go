@@ -1,4 +1,4 @@
-package main
+package monitor
 
 import (
 	"bufio"
@@ -26,8 +26,8 @@ type Monitor struct {
 	logFile *os.File
 }
 
-// NewMonitor 创建监控器
-func NewMonitor(port serial.Port, opts *Options) *Monitor {
+// New 创建监控器
+func New(port serial.Port, opts *Options) *Monitor {
 	m := &Monitor{
 		port:    port,
 		options: opts,
