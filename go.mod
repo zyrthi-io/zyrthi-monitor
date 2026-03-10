@@ -1,6 +1,6 @@
 module github.com/zyrthi-io/zyrthi-monitor
 
-go 1.24.3
+go 1.24
 
 require (
 	github.com/creack/goselect v0.1.2 // indirect
